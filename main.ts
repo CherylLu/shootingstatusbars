@@ -1,7 +1,11 @@
 namespace SpriteKind {
     export const pellet = SpriteKind.create()
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
+    status.spriteAttachedTo().destroy()
+    info.changeScoreBy(1)
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     子彈 = sprites.createProjectileFromSprite(img`
         . . . . . 
         . 5 5 5 . 
@@ -9,10 +13,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         . 5 5 5 . 
         . . . . . 
         `, 太空戰士, 50, 0)
-})
-statusbars.onZero(StatusBarKind.EnemyHealth, function (status) {
-    status.spriteAttachedTo().destroy()
-    info.changeScoreBy(1)
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     sprite.destroy()
